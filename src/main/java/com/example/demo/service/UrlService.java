@@ -8,6 +8,8 @@ import com.example.demo.repository.UrlRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class UrlService {
@@ -27,4 +29,19 @@ public class UrlService {
         }
         return urlRepository.save(url);
     }
+
+    public List<Url> findAll(String userId){
+
+        Customer customer = customerRepository.findByUserId(userId).orElse(null);
+
+        System.out.println("UrlSerice > findAllByuserId  :  " +  userId);
+
+        if(customer != null){
+            return urlRepository.findAllUrlsByCustomer(customer);
+        }
+
+        return null;
+    }
+
+
 }

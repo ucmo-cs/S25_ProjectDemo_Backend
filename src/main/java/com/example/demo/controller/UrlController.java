@@ -7,13 +7,11 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 public class UrlController {
 
     private final UrlService urlService;
@@ -31,4 +29,15 @@ public class UrlController {
 
     }
 
+
+
+    @CrossOrigin
+    @GetMapping("/urls")
+    public ResponseEntity<?> findAllurls(){
+
+        String userId = "tk";
+        System.out.println("FindAllUrls By Name : " + userId);
+        return new ResponseEntity<>(urlService.findAll(userId), HttpStatus.OK);
+
+    }
 }
